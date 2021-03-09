@@ -25,3 +25,13 @@ Valheim 上でカスタムコードの実行を可能にするフレームワー
 BepInEx\plugins へ SmartValheim.dll をコピーすれば完了です。
 
 以上、起動して効果を確認してください。
+
+## 補足 BepInExPack for Valheim のマニュアルインストール手順詳細
+
+Manual Donwload をクリックしてファイルを一式ダウンロードします。
+
+![BepInExPack Valheim _ Thunderstore - The Valheim M](https://user-images.githubusercontent.com/3882492/110451539-a2bd4800-8107-11eb-9582-05c95e52ac1a.png)
+
+展開したファイル郡を Valheim のインストール先ディレクトリにコピーします。以下の様な構成になります。
+
+上記の BepInEx の中の plugins に SmartValheim.dll をコピーすればインストール完了です。
