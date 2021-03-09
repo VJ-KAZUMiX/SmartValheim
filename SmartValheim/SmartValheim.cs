@@ -28,5 +28,14 @@ namespace SmartValheim
             // クールダウンの時間をパワーの効果時間と同じにする
             __instance.m_guardianSE.m_cooldown = __instance.m_guardianSE.m_ttl;
         }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(SE_Stats), "ModifyMaxCarryWeight")]
+        private static void ModifyMaxCarryWeight_Prefix(SE_Stats __instance, float baseLimit, ref float limit)
+        {
+            //MyLogSource.LogInfo("ModifyMaxCarryWeight_Prefix");   // ここ毎フレ呼ばれる
+            // 重量上限の効果をさらに追加
+            limit += __instance.m_addMaxCarryWeight;
+        }
     }
 }
