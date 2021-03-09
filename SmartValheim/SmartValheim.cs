@@ -37,5 +37,16 @@ namespace SmartValheim
             // 重量上限の効果をさらに追加
             limit += __instance.m_addMaxCarryWeight;
         }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(Player), "UpdateMovementModifier")]
+        private static void UpdateMovementModifier_Postfix(Player __instance)
+        {
+            // 移動速度がマイナス補正されていて、メギンギョルズを装備している場合は、補正無しにする
+            if (__instance.m_equipmentMovementModifier < 0 && __instance.GetSEMan().HaveStatusEffect("BeltStrength"))
+            {
+                __instance.m_equipmentMovementModifier = 0;
+            }
+        }
     }
 }
