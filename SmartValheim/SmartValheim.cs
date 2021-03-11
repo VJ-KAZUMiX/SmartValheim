@@ -31,9 +31,8 @@ namespace SmartValheim
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(SE_Stats), "ModifyMaxCarryWeight")]
-        private static void ModifyMaxCarryWeight_Prefix(SE_Stats __instance, float baseLimit, ref float limit)
+        private static void ModifyMaxCarryWeight_Prefix(SE_Stats __instance, ref float limit)
         {
-            //MyLogSource.LogInfo("ModifyMaxCarryWeight_Prefix");   // ここ毎フレ呼ばれる
             // 重量上限の効果をさらに追加
             limit += __instance.m_addMaxCarryWeight;
         }
