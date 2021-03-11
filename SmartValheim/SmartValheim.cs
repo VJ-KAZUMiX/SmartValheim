@@ -5,7 +5,7 @@ using HarmonyLib;
 
 namespace SmartValheim
 {
-    [BepInPlugin("jp.refactor.valheim.plugins.SmartValheim", "SmartValheim Plug-In", "1.0.0.0")]
+    [BepInPlugin("jp.refactor.valheim.plugins.SmartValheim", "SmartValheim Plug-In", "1.1.0.0")]
     public class SmartValheim : BaseUnityPlugin
     {
         public static ManualLogSource MyLogSource;
@@ -47,6 +47,20 @@ namespace SmartValheim
             {
                 __instance.m_equipmentMovementModifier = 0;
             }
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(EnvMan), "SetEnv")]
+        private static void SetEnv_Prefix(ref float dayInt, ref float nightInt, ref float morningInt, ref float eveningInt)
+        {
+            // 昼用のライティング要素を増加
+            dayInt += 0.5f;
+            // リバランス
+            float tmpRate = 1f / (dayInt + nightInt + morningInt + eveningInt);
+            dayInt *= tmpRate;
+            nightInt *= tmpRate;
+            morningInt *= tmpRate;
+            eveningInt *= tmpRate;
         }
     }
 }
